@@ -1,5 +1,6 @@
 "use client";
 
+import { SiteLogo } from "@/components/brand/SiteLogo";
 import { site } from "@/content/site";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -49,16 +50,22 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 md:px-6">
         <Link
           href="#top"
-          className="mode-text font-display text-xl tracking-tight md:text-2xl"
+          className="mode-text group flex items-center gap-3 font-display text-lg font-medium tracking-tight md:text-xl"
         >
-          {site.name}
+          <SiteLogo
+            src={site.assets.logo}
+            alt={`${site.name} logo`}
+            size={44}
+            className="transition-transform duration-300 group-hover:scale-105"
+          />
+          <span className="hidden sm:inline">{site.name}</span>
         </Link>
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
           {nav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="mode-muted text-sm transition hover:text-white"
+              className="nav-link mode-muted text-sm transition hover:text-white"
             >
               {item.label}
             </Link>

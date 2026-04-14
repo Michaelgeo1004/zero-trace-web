@@ -1,5 +1,10 @@
 export const site = {
   name: "Zero Trace",
+  /** Campaign assets in /public */
+  assets: {
+    logo: "/logo-zero-trace.png",
+    kitFlatlay: "/hero-kit-flatlay.png",
+  },
   tagline: "Reusable Sustainable Event Kits as a Service",
   description:
     "End-to-end zero-waste event kits—delivered, collected, cleaned, and redeployed—for organizers who want less plastic and less stress.",

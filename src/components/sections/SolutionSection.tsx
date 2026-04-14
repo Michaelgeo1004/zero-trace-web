@@ -1,5 +1,6 @@
 import { site } from "@/content/site";
 import { Reveal } from "@/components/motion/Reveal";
+import Image from "next/image";
 
 function KitVisual({ kind }: { kind: "dining" | "signage" | "loop" }) {
   if (kind === "dining") {
@@ -74,14 +75,31 @@ export function SolutionSection() {
             </Reveal>
           ))}
         </div>
+        <Reveal>
+          <div className="relative mt-14 overflow-hidden rounded-3xl border border-white/10 shadow-xl shadow-black/30">
+            <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-[var(--section)] via-transparent to-transparent" />
+            <div className="relative aspect-[21/9] min-h-[200px] w-full md:aspect-[24/9]">
+              <Image
+                src={site.assets.kitFlatlay}
+                alt="Zero Trace sustainable event kit — flat lay of branded reusables"
+                fill
+                className="object-cover object-center"
+                sizes="(max-width: 768px) 100vw, 1152px"
+              />
+            </div>
+            <p className="mode-muted relative z-[2] px-6 py-4 text-center text-xs md:text-sm">
+              Real kit composition for weddings, corporate events, and campus programs—customizable to your brand.
+            </p>
+          </div>
+        </Reveal>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {solution.kitImages.map((kit, i) => (
             <Reveal key={kit.title} delay={i * 0.06}>
               <figure
-                className="group rounded-2xl border border-cream/10 bg-forest-deep/55 p-3 mode-surface animate-float"
+                className="group rounded-2xl border border-cream/10 bg-forest-deep/55 p-3 mode-surface animate-float transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/25"
                 style={{ animationDelay: `${i * 0.35}s` }}
               >
-                <div className="relative overflow-hidden rounded-xl border border-cream/10">
+                <div className="relative overflow-hidden rounded-xl border border-cream/10 transition-transform duration-500 group-hover:scale-[1.02]">
                   <KitVisual kind={kit.kind} />
                 </div>
                 <figcaption className="mode-text px-1 pb-2 pt-4 text-sm font-medium">

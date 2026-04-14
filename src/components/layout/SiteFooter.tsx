@@ -1,3 +1,4 @@
+import { SiteLogo } from "@/components/brand/SiteLogo";
 import { site } from "@/content/site";
 import Link from "next/link";
 
@@ -6,7 +7,15 @@ export function SiteFooter() {
     <footer className="mode-section border-t py-16">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 md:grid-cols-2 md:px-6">
         <div>
-          <p className="mode-text font-display text-2xl">{site.name}</p>
+          <div className="flex items-center gap-3">
+            <SiteLogo
+              src={site.assets.logo}
+              alt={`${site.name} logo`}
+              size={40}
+              animate={false}
+            />
+            <p className="mode-text font-display text-2xl">{site.name}</p>
+          </div>
           <p className="mode-muted mt-3 max-w-md text-sm leading-relaxed">
             {site.footer.mission}
           </p>

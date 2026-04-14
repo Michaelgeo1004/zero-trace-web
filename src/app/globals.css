@@ -106,6 +106,57 @@ body {
   );
 }
 
+.hero-shell {
+  isolation: isolate;
+}
+
+.hero-mesh {
+  background:
+    radial-gradient(ellipse 80% 55% at 70% -10%, color-mix(in srgb, var(--accent) 28%, transparent), transparent 55%),
+    radial-gradient(ellipse 60% 45% at 0% 100%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 50%),
+    linear-gradient(180deg, color-mix(in srgb, var(--section-alt) 88%, transparent), var(--section));
+  animation: hero-mesh-shift 14s ease-in-out infinite alternate;
+}
+
+@keyframes hero-mesh-shift {
+  0% {
+    opacity: 0.85;
+    filter: saturate(1);
+  }
+  100% {
+    opacity: 1;
+    filter: saturate(1.08);
+  }
+}
+
+.hero-image-frame {
+  animation: hero-frame-glow 5s ease-in-out infinite;
+}
+
+@keyframes hero-frame-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 25px 50px -12px rgba(0, 0, 0, 0.45),
+      0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent);
+  }
+  50% {
+    box-shadow:
+      0 28px 60px -12px rgba(0, 0, 0, 0.5),
+      0 0 40px -8px color-mix(in srgb, var(--accent) 38%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-mesh {
+    animation: none;
+  }
+
+  .hero-image-frame {
+    animation: none;
+  }
+}
+
 .mode-marquee {
   background-color: color-mix(in srgb, var(--section-alt) 78%, var(--accent) 22%);
   border-color: var(--surface-border);
@@ -130,6 +181,26 @@ body {
 
 .mode-button:hover {
   background-color: var(--accent-strong);
+}
+
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  border-radius: 9999px;
+  background: var(--accent);
+  transition: width 0.28s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
 }
 
 .animate-float {
