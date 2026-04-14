@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 type RevealProps = {
   children: ReactNode;
@@ -11,8 +11,14 @@ type RevealProps = {
 
 export function Reveal({ children, className, delay = 0 }: RevealProps) {
   const reduce = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
 
-  if (reduce) {
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Keep content visible until client mount so runtime hiccups don't hide the page.
+  if (reduce || !mounted) {
     return <div className={className}>{children}</div>;
   }
 

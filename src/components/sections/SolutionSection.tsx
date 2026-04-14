@@ -68,8 +68,8 @@ export function SolutionSection() {
           </p>
         </Reveal>
         <div className="mode-muted mt-10 max-w-3xl space-y-4">
-          {solution.body.map((p) => (
-            <Reveal key={p.slice(0, 20)}>
+          {solution.body.map((p, i) => (
+            <Reveal key={`${i}-${p.slice(0, 20)}`}>
               <p className="leading-relaxed">{p}</p>
             </Reveal>
           ))}

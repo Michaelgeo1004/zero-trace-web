@@ -32,8 +32,8 @@ export function ProblemSection() {
           ))}
         </div>
         <div className="mode-muted mt-12 max-w-3xl space-y-4">
-          {problem.narrative.map((p) => (
-            <Reveal key={p.slice(0, 24)}>
+          {problem.narrative.map((p, i) => (
+            <Reveal key={`${i}-${p.slice(0, 24)}`}>
               <p className="leading-relaxed">{p}</p>
             </Reveal>
           ))}
