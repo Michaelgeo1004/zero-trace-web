@@ -1,11 +1,27 @@
 <svg width="420" height="420" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="420" height="420" fill="#1C2017"/>
-<circle cx="210" cy="170" r="74" fill="#EBC8A8"/>
-<path d="M136 316C136 270 169 242 210 242C251 242 284 270 284 316V420H136V316Z" fill="#667C43"/>
-<path d="M146 156C146 108 175 84 210 84C245 84 274 108 274 156V172H146V156Z" fill="#2E1D15"/>
-<path d="M146 148C156 134 174 126 210 126C246 126 264 134 274 148V120H146V148Z" fill="#2E1D15"/>
-<circle cx="184" cy="173" r="5" fill="#3B271D"/>
-<circle cx="236" cy="173" r="5" fill="#3B271D"/>
-<path d="M188 201C194 208 201 211 210 211C219 211 226 208 232 201" stroke="#A26B52" stroke-width="4" stroke-linecap="round"/>
-<text x="210" y="52" fill="#E6EED8" font-family="Arial, sans-serif" font-size="25" text-anchor="middle">Operations &amp; Finance</text>
+  <defs>
+    <linearGradient id="bgR" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#1e2419"/>
+      <stop offset="100%" stop-color="#12180f"/>
+    </linearGradient>
+    <linearGradient id="skinR" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f2d5c4"/>
+      <stop offset="100%" stop-color="#d9b39a"/>
+    </linearGradient>
+    <linearGradient id="jacketR" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5a6b3f"/>
+      <stop offset="100%" stop-color="#3d4a2e"/>
+    </linearGradient>
+  </defs>
+  <rect width="420" height="420" fill="url(#bgR)"/>
+  <ellipse cx="210" cy="402" rx="198" ry="86" fill="#2a3520" opacity="0.35"/>
+  <path d="M82 358c32-50 86-80 128-80s96 30 128 80v62H82V358z" fill="url(#jacketR)"/>
+  <path d="M128 352h164v8c-54 18-110 18-164 0v-8z" fill="#2f3828" opacity="0.5"/>
+  <path d="M172 272h76v46c-25 12-51 12-76 0v-46z" fill="url(#skinR)"/>
+  <ellipse cx="210" cy="198" rx="68" ry="84" fill="url(#skinR)"/>
+  <!-- hair with side part -->
+  <path d="M136 200c10-62 58-102 118-102 36 0 68 16 88 42-32-26-66-38-102-38-46 0-84 24-104 98z" fill="#231a14"/>
+  <path d="M178 128c28-22 52-34 76-34s48 12 76 34c-22-14-46-22-76-22s-54 8-76 22z" fill="#2e241c" opacity="0.9"/>
+  <!-- soft smile curve only -->
+  <path d="M186 228c16 10 32 14 48 14s32-4 48-14" stroke="#7a5544" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
 </svg>

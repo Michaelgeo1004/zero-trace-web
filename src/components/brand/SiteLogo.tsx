@@ -24,7 +24,7 @@ export function SiteLogo({
 
   return (
     <motion.span
-      className={`relative inline-flex shrink-0 rounded-full bg-white/5 p-0.5 ring-1 ring-white/15 shadow-lg shadow-black/20 ${className}`}
+      className={`relative inline-flex shrink-0 overflow-hidden rounded-full bg-white/5 p-0.5 ring-1 ring-white/15 shadow-lg shadow-black/20 ${className}`}
       animate={
         shouldPulse
           ? {
@@ -43,7 +43,7 @@ export function SiteLogo({
         alt={alt}
         width={size}
         height={size}
-        className="rounded-full bg-white object-contain p-0.5"
+        className="rounded-full object-cover"
         priority
         sizes={`${size}px`}
       />

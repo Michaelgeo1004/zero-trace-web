@@ -1,11 +1,27 @@
 <svg width="420" height="420" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="420" height="420" fill="#102533"/>
-<circle cx="210" cy="170" r="74" fill="#E9C5A7"/>
-<path d="M136 316C136 270 169 242 210 242C251 242 284 270 284 316V420H136V316Z" fill="#355A85"/>
-<path d="M150 154C150 112 177 86 210 86C243 86 270 112 270 154V172H150V154Z" fill="#231815"/>
-<rect x="170" y="136" width="80" height="20" rx="10" fill="#231815"/>
-<circle cx="184" cy="172" r="5" fill="#35251E"/>
-<circle cx="236" cy="172" r="5" fill="#35251E"/>
-<path d="M188 201C194 208 201 211 210 211C219 211 226 208 232 201" stroke="#A56E56" stroke-width="4" stroke-linecap="round"/>
-<text x="210" y="52" fill="#D8EAF6" font-family="Arial, sans-serif" font-size="26" text-anchor="middle">Strategy &amp; Planning</text>
+  <defs>
+    <linearGradient id="bgS" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0f2430"/>
+      <stop offset="100%" stop-color="#152a35"/>
+    </linearGradient>
+    <linearGradient id="skinS" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0d4bc"/>
+      <stop offset="100%" stop-color="#d4a88a"/>
+    </linearGradient>
+    <linearGradient id="blazerS" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3d5c78"/>
+      <stop offset="100%" stop-color="#2a4156"/>
+    </linearGradient>
+  </defs>
+  <rect width="420" height="420" fill="url(#bgS)"/>
+  <ellipse cx="210" cy="400" rx="200" ry="88" fill="#1e3a4a" opacity="0.3"/>
+  <path d="M88 362c30-54 82-86 122-86s92 32 122 86v58H88V362z" fill="url(#blazerS)"/>
+  <path d="M165 275h90v42c-30 14-60 14-90 0v-42z" fill="url(#skinS)"/>
+  <ellipse cx="210" cy="196" rx="70" ry="86" fill="url(#skinS)"/>
+  <!-- pulled-back hair / bun silhouette -->
+  <path d="M142 188c6-52 48-92 108-92 42 0 78 28 92 68-28-34-58-50-92-50-48 0-84 22-108 74z" fill="#1c1410"/>
+  <circle cx="268" cy="158" r="28" fill="#1c1410"/>
+  <ellipse cx="210" cy="118" rx="56" ry="36" fill="#261c18"/>
+  <!-- calm profile hint: cheek plane -->
+  <path d="M248 192c0 28-18 48-38 52" stroke="#8b6048" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
 </svg>

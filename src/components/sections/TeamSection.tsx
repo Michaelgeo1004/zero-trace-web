@@ -20,18 +20,18 @@ export function TeamSection() {
           {team.members.map((m, i) => (
             <Reveal key={m.name} delay={i * 0.06}>
               <article
-                className="h-full rounded-2xl border border-cream/10 bg-forest-deep/50 p-8 mode-surface animate-lift-hover animate-float"
-                style={{ animationDelay: `${i * 0.3}s` }}
+                className="h-full rounded-2xl border border-cream/10 bg-forest-deep/50 p-8 mode-surface animate-lift-hover"
               >
-                <div className="relative mb-6 overflow-hidden rounded-xl border border-cream/10">
+                <div className="relative mb-6 aspect-square w-full overflow-hidden rounded-xl border border-cream/10 bg-[var(--section-alt)]">
                   <Image
                     src={m.image}
-                    alt={`${m.name} team profile`}
+                    alt={`${m.name}, ${m.role}`}
                     width={420}
                     height={420}
-                    className="h-52 w-full object-cover"
+                    className="h-full w-full object-cover object-top"
+                    sizes="(max-width: 768px) 100vw, 33vw"
                   />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-forest-deep/35 to-transparent" />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--section)]/55 via-transparent to-transparent" />
                 </div>
                 <p className="mode-text font-display text-xl">{m.name}</p>
                 <p className="mode-accent mt-2 text-sm font-medium">{m.role}</p>

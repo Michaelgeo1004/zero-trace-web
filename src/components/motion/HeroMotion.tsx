@@ -1,12 +1,16 @@
 "use client";
 
+import { HeroRotatingHeadline } from "@/components/motion/HeroRotatingHeadline";
+import { HeroVisualDeck } from "@/components/motion/HeroVisualDeck";
 import { site } from "@/content/site";
 import { motion, useReducedMotion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 
+/** Parent must define both `hidden` and `show` or children can stay at opacity 0. */
 const stagger = {
+  hidden: {},
   show: {
+    opacity: 1,
     transition: { staggerChildren: 0.11, delayChildren: 0.08 },
   },
 };
@@ -22,12 +26,12 @@ const fadeUp = {
 
 export function HeroMotion() {
   const reduce = useReducedMotion();
-  const { hero, assets } = site;
+  const { hero } = site;
 
   return (
-    <div className="relative mx-auto grid max-w-6xl gap-12 px-4 md:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
+    <div className="relative mx-auto grid max-w-6xl gap-12 px-4 md:px-6 lg:grid-cols-[minmax(0,1.02fr)_minmax(20rem,0.98fr)] lg:items-center lg:gap-16">
       <motion.div
-        className="relative z-[1]"
+        className="relative z-[1] min-w-0"
         initial={reduce ? false : "hidden"}
         animate={reduce ? undefined : "show"}
         variants={stagger}
@@ -42,7 +46,11 @@ export function HeroMotion() {
           variants={fadeUp}
           className="mode-text mt-6 font-display text-4xl font-medium leading-[1.08] tracking-tight md:text-5xl lg:text-[3.25rem] xl:text-[3.5rem]"
         >
-          {hero.headline}
+          <HeroRotatingHeadline
+            prefix={hero.headlinePrefix}
+            keywords={hero.headlineKeywords}
+            suffix={hero.headlineSuffix}
+          />
         </motion.h1>
         <motion.p
           variants={fadeUp}
@@ -91,41 +99,38 @@ export function HeroMotion() {
       </motion.div>
 
       <motion.div
-        className="relative z-[1] lg:justify-self-end"
+        className="relative z-[1] w-full min-w-0 lg:min-w-[20rem] lg:max-w-[34rem] lg:justify-self-end"
         initial={reduce ? false : { opacity: 0, scale: 0.94, y: 28 }}
         animate={reduce ? undefined : { opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.85, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="hero-image-frame relative overflow-hidden rounded-3xl border border-white/10 bg-black/20 shadow-2xl shadow-black/40">
-          <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-tr from-[var(--section)]/90 via-transparent to-transparent" />
-          <div className="pointer-events-none absolute inset-0 z-[1] ring-1 ring-inset ring-white/10" />
+        <div className="flex flex-col">
           <motion.div
-            className="relative aspect-[4/3] w-full md:aspect-[5/4]"
-            animate={
-              reduce
-                ? undefined
-                : { y: [0, -6, 0] }
-            }
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.55, duration: 0.5 }}
+            className="flex justify-center lg:justify-start"
           >
-            <Image
-              src={assets.kitFlatlay}
-              alt="Zero Trace reusable event kit — branded sustainable merchandise and dining ware"
-              fill
-              className="object-cover object-center"
-              sizes="(max-width: 1024px) 100vw, 42vw"
-              priority
-            />
+            <HeroVisualDeck slides={hero.visualDeck} />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.75, duration: 0.5 }}
+            className="mt-4 max-w-md rounded-2xl border-l-[3px] px-4 py-3 text-left shadow-lg shadow-black/15 backdrop-blur-sm"
+            style={{
+              borderColor: "color-mix(in srgb, var(--accent) 35%, var(--surface-border))",
+              backgroundColor: "color-mix(in srgb, var(--section) 84%, transparent)",
+            }}
+          >
+            <p className="mode-accent mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] md:text-xs">
+              Built for live operations
+            </p>
+            <p className="mode-muted text-xs leading-relaxed lg:text-sm">
+              {hero.operationsCaption}
+            </p>
           </motion.div>
         </div>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6, duration: 0.5 }}
-          className="mode-muted mt-4 max-w-md text-center text-xs leading-relaxed lg:text-left lg:text-sm"
-        >
-          Full kit flat lay: dining ware, drinkware, signage, and branded collateral—ready for your next campaign.
-        </motion.p>
       </motion.div>
     </div>
   );

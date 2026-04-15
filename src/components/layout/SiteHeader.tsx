@@ -14,9 +14,10 @@ const nav = [
 ];
 
 const themes = [
-  { id: "forest", label: "Forest" },
-  { id: "aurora", label: "Aurora" },
-  { id: "sunset", label: "Sunset" },
+  { id: "forest", label: "Forest", icon: "🌲" },
+  { id: "aurora", label: "Aurora", icon: "🧊" },
+  { id: "sunset", label: "Sunset", icon: "🌇" },
+  { id: "midnight", label: "Dark", icon: "🌙" },
 ] as const;
 
 export function SiteHeader() {
@@ -40,7 +41,7 @@ export function SiteHeader() {
   }
 
   return (
-    <header className="mode-header sticky top-0 z-50 border-b border-cream/10 bg-forest-deep/90 backdrop-blur-md">
+    <header className="mode-header sticky top-0 z-50 border-b backdrop-blur-md">
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-moss focus:px-4 focus:py-2 focus:text-forest-deep"
@@ -77,15 +78,22 @@ export function SiteHeader() {
               key={entry.id}
               type="button"
               onClick={() => updateTheme(entry.id)}
-              className={`rounded-full border px-3 py-1.5 text-xs font-medium transition ${
+              className={`rounded-full border px-2.5 py-1.5 text-sm leading-none transition ${
                 theme === entry.id
-                  ? "border-cream/40 text-white"
-                  : "border-cream/20 mode-muted hover:border-cream/40 hover:text-white"
+                  ? "text-white"
+                  : "mode-muted hover:text-white"
               }`}
               aria-pressed={theme === entry.id}
-              style={theme === entry.id ? { backgroundColor: "color-mix(in srgb, var(--accent) 22%, transparent)" } : undefined}
+              aria-label={`Switch theme: ${entry.label}`}
+              style={{
+                borderColor: "var(--surface-border)",
+                ...(theme === entry.id
+                  ? { backgroundColor: "color-mix(in srgb, var(--accent) 22%, transparent)" }
+                  : {}),
+              }}
             >
-              {entry.label}
+              <span aria-hidden>{entry.icon}</span>
+              <span className="sr-only">{entry.label}</span>
             </button>
           ))}
         </div>
@@ -125,7 +133,7 @@ export function SiteHeader() {
       {open ? (
         <div
           id="mobile-nav"
-          className="mode-header border-t border-cream/10 bg-forest-deep px-4 py-4 md:hidden"
+          className="mode-header border-t px-4 py-4 md:hidden"
         >
           <div className="mb-4 flex flex-wrap gap-2">
             {themes.map((entry) => (
@@ -133,15 +141,22 @@ export function SiteHeader() {
                 key={entry.id}
                 type="button"
                 onClick={() => updateTheme(entry.id)}
-                className={`rounded-full border px-3 py-1.5 text-xs font-medium transition ${
+                className={`rounded-full border px-2.5 py-1.5 text-sm leading-none transition ${
                   theme === entry.id
-                  ? "border-cream/40 text-white"
-                  : "border-cream/20 mode-muted hover:border-cream/40 hover:text-white"
+                    ? "text-white"
+                    : "mode-muted hover:text-white"
                 }`}
                 aria-pressed={theme === entry.id}
-                style={theme === entry.id ? { backgroundColor: "color-mix(in srgb, var(--accent) 22%, transparent)" } : undefined}
+                aria-label={`Switch theme: ${entry.label}`}
+                style={{
+                  borderColor: "var(--surface-border)",
+                  ...(theme === entry.id
+                    ? { backgroundColor: "color-mix(in srgb, var(--accent) 22%, transparent)" }
+                    : {}),
+                }}
               >
-                {entry.label}
+                <span aria-hidden>{entry.icon}</span>
+                <span className="sr-only">{entry.label}</span>
               </button>
             ))}
           </div>

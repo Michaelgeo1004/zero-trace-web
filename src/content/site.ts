@@ -1,9 +1,16 @@
 export const site = {
   name: "Zero Trace",
-  /** Campaign assets in /public */
+  /** Campaign assets in `/public/brand/` (Gemini-generated set) */
   assets: {
-    logo: "/logo-zero-trace.png",
-    kitFlatlay: "/hero-kit-flatlay.png",
+    /** Primary brand badge in circle form; favicon is still from `src/app/icon.png`. */
+    logo: "/brand/logo-zero-trace.png",
+    /** Default wide kit reference (latest Gemini set) */
+    kitFlatlay: "/brand/kit-showcase-spread.png",
+    kit: {
+      /** Campaign hero — distinct from tier cards & solution showcase */
+      hero: "/brand/hero-campaign.png",
+      solutionBanner: "/brand/kit-showcase-spread.png",
+    },
   },
   tagline: "Reusable Sustainable Event Kits as a Service",
   description:
@@ -28,11 +35,55 @@ export const site = {
     "Chennai & Tamil Nadu → metros next",
   ],
   hero: {
-    headline: "Zero-waste events, without the disposable hangover.",
+    /** Stable sentence + animated keyword typing in `HeroRotatingHeadline`. */
+    headlinePrefix: "Zero-waste events, without the hassle of",
+    headlineKeywords: [
+      "disposable hangover",
+      "single-use mess",
+      "plastic aftertaste",
+      "wasteful aftermath",
+      "environmental impact",
+      "sustainable solutions",
+      "eco-friendly events",
+      "zero-waste initiatives",
+      "eco-conscious gatherings",
+      "sustainable operations",
+      "eco-friendly event kits",
+      "zero-waste event kits",
+    ],
+    headlineSuffix: ".",
     sub:
       "Rent complete reusable kits for weddings, corporate gatherings, and campus events—so sustainability is operational, not optional.",
     ctaPrimary: "Plan an event",
     ctaSecondary: "See the kits",
+    operationsCaption:
+      "Sanitized kits, polished brand touchpoints, and dependable logistics that hold up during real event runs.",
+    /**
+     * Single hero carousel (see `HeroVisualDeck`) — omits warehouse fulfillment frame
+     * so it does not repeat Tier 3 card art.
+     */
+    visualDeck: [
+      {
+        src: "/brand/hero-campaign.png",
+        label: "Signature",
+        alt: "Campaign hero — reusable event kits and branded presentation",
+      },
+      {
+        src: "/brand/kit-showcase-spread.png",
+        label: "Full kit",
+        alt: "Full reusable kit on table with tote, glassware, and linens",
+      },
+      {
+        src: "/brand/kit-tier-social.png",
+        label: "Social",
+        alt: "Wedding and celebration tablescape with reusables",
+      },
+      {
+        src: "/brand/kit-tier-corporate.png",
+        label: "Programs",
+        alt: "Corporate desk kit with notebook, cup, and program collateral",
+      },
+    ],
   },
   problem: {
     title: "The problem",
@@ -80,18 +131,83 @@ export const site = {
       "Cost discipline through repeat deployment",
       "Modular kits planners can standardize across clients",
     ],
+    /**
+     * Hero-style showcase (replaces a single ultra-wide crop).
+     * Mirrors venture story: deliver → use → collect → redeploy.
+     */
+    /** Shown above the three tier cards */
+    kitTiersIntro:
+      "Three distinct compositions—intimate socials, branded programs, and operations—not the same plate-and-spoon crop repeated.",
+    showcase: {
+      kicker: "End-to-end kit service",
+      title: "Built for real event operations",
+      lead:
+        "Validated with organizers and stakeholders—kits are designed around rental, return, cleaning, and inventory—not a one-off swap for disposables.",
+      /** Full table + tote spread; inset = corporate program props */
+      imagePrimary: "/brand/kit-showcase-spread.png",
+      imageSecondary: "/brand/kit-tier-corporate.png",
+      steps: [
+        {
+          title: "Deliver",
+          detail: "Kits sized to guest count, venue flow, and event type.",
+        },
+        {
+          title: "Use",
+          detail: "Service-ware, signage, and segregation tools guests actually touch.",
+        },
+        {
+          title: "Collect & sanitize",
+          detail: "Pickup and professional cleaning so everything is event-ready again.",
+        },
+        {
+          title: "Redeploy",
+          detail: "Tracked inventory and repeat deployment—where the model earns its margin.",
+        },
+      ],
+    },
+    /** Latest tier art in `/public/brand/kit-tier-*.png` */
     kitImages: [
       {
         kind: "dining",
-        title: "Dining starter kit",
+        tier: "Tier 1 · Intimate & social",
+        title: "Weddings & celebrations",
+        image: "/brand/kit-tier-social.png",
+        objectPosition: "50% 48%",
+        blurb: "Full tablescape—ceramics, glassware, cutlery, linens, florals, and printed run-of-show.",
+        includes: [
+          "Plates, bowls & glassware",
+          "Cutlery + green tumblers",
+          "Linen + tent / menu cards",
+          "Centerpiece-ready styling",
+        ],
       },
       {
         kind: "signage",
-        title: "Signage and decor set",
+        tier: "Tier 2 · Corporate & campus",
+        title: "Programs & venues",
+        image: "/brand/kit-tier-corporate.png",
+        objectPosition: "50% 45%",
+        blurb: "Desk and registration touchpoints—notebook, pen, cup, QR stand, and badge-ready collateral.",
+        includes: [
+          "Notebook & wood pen",
+          "QR / program tent",
+          "ID badge + tray",
+          "Conference-ready palette",
+        ],
       },
       {
         kind: "loop",
-        title: "Return and clean loop",
+        tier: "Tier 3 · Fulfillment",
+        title: "Sanitize & redeploy",
+        image: "/brand/kit-loop.png",
+        objectPosition: "50% 48%",
+        blurb: "Circularity in practice—return, sanitation, and inventory so the same kit line serves the next guest list.",
+        includes: [
+          "Reuse-first workflow",
+          "Cleaning & QA handoff",
+          "Tracked kit lines",
+          "Ready for the next deployment",
+        ],
       },
     ],
     pricing: {

@@ -38,6 +38,18 @@ html[data-theme="sunset"] {
   --surface-border: rgba(255, 210, 166, 0.26);
 }
 
+html[data-theme="midnight"] {
+  --bg: #07090a;
+  --fg: #eef1ec;
+  --muted: #bcc6b8;
+  --accent: #7f9874;
+  --accent-strong: #9ab88e;
+  --section: #0c1110;
+  --section-alt: #121917;
+  --surface: rgba(21, 30, 27, 0.78);
+  --surface-border: rgba(166, 190, 174, 0.24);
+}
+
 html {
   scroll-behavior: smooth;
 }

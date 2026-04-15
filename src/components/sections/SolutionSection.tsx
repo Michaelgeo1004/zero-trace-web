@@ -2,55 +2,6 @@ import { site } from "@/content/site";
 import { Reveal } from "@/components/motion/Reveal";
 import Image from "next/image";
 
-function KitVisual({ kind }: { kind: "dining" | "signage" | "loop" }) {
-  if (kind === "dining") {
-    return (
-      <svg viewBox="0 0 240 140" className="h-48 w-full rounded-xl">
-        <defs>
-          <linearGradient id="k1" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="var(--section-alt)" />
-            <stop offset="100%" stopColor="var(--surface)" />
-          </linearGradient>
-        </defs>
-        <rect x="0" y="0" width="240" height="140" rx="16" fill="url(#k1)" />
-        <rect x="46" y="34" width="20" height="72" rx="8" fill="var(--fg)" />
-        <rect x="74" y="34" width="7" height="72" rx="3.5" fill="var(--fg)" />
-        <rect x="86" y="34" width="7" height="72" rx="3.5" fill="var(--fg)" />
-        <rect x="98" y="34" width="7" height="72" rx="3.5" fill="var(--fg)" />
-        <rect x="126" y="34" width="10" height="72" rx="5" fill="var(--fg)" />
-        <ellipse cx="166" cy="70" rx="17" ry="36" fill="var(--fg)" />
-      </svg>
-    );
-  }
-
-  if (kind === "signage") {
-    return (
-      <svg viewBox="0 0 240 140" className="h-48 w-full rounded-xl">
-        <rect x="0" y="0" width="240" height="140" rx="16" fill="var(--section-alt)" />
-        <rect x="52" y="32" width="136" height="26" rx="6" fill="var(--fg)" />
-        <rect x="62" y="39" width="74" height="4" rx="2" fill="var(--section)" />
-        <rect x="62" y="47" width="57" height="4" rx="2" fill="var(--section)" />
-        <rect x="52" y="64" width="62" height="42" rx="8" fill="var(--accent)" />
-        <path d="M64 91L76 78L85 86L100 72" stroke="var(--section)" strokeWidth="4" strokeLinecap="round" />
-        <circle cx="154" cy="84" r="20" fill="var(--fg)" />
-        <path d="M147 84L153 90L163 79" stroke="var(--section)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    );
-  }
-
-  return (
-    <svg viewBox="0 0 240 140" className="h-48 w-full rounded-xl">
-      <rect x="0" y="0" width="240" height="140" rx="16" fill="var(--section-alt)" />
-      <circle cx="120" cy="70" r="42" fill="none" stroke="var(--fg)" strokeWidth="5" strokeDasharray="10 8" />
-      <path d="M88 66C96 52 109 45 123 45C140 45 154 54 161 67" stroke="var(--accent)" strokeWidth="6" strokeLinecap="round" />
-      <path d="M152 60L162 67L156 78" stroke="var(--accent)" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M152 74C144 88 131 95 117 95C100 95 86 86 79 73" stroke="var(--fg)" strokeWidth="6" strokeLinecap="round" />
-      <path d="M88 80L78 73L84 62" stroke="var(--fg)" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
-      <rect x="108" y="58" width="24" height="28" rx="6" fill="var(--fg)" />
-    </svg>
-  );
-}
-
 export function SolutionSection() {
   const { solution } = site;
 
@@ -76,34 +27,131 @@ export function SolutionSection() {
           ))}
         </div>
         <Reveal>
-          <div className="relative mt-14 overflow-hidden rounded-3xl border border-white/10 shadow-xl shadow-black/30">
-            <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-[var(--section)] via-transparent to-transparent" />
-            <div className="relative aspect-[21/9] min-h-[200px] w-full md:aspect-[24/9]">
-              <Image
-                src={site.assets.kitFlatlay}
-                alt="Zero Trace sustainable event kit — flat lay of branded reusables"
-                fill
-                className="object-cover object-center"
-                sizes="(max-width: 768px) 100vw, 1152px"
-              />
+          <div
+            className="mt-14 grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center lg:gap-14"
+            style={{ borderColor: "var(--surface-border)" }}
+          >
+            <div className="relative mx-auto w-full max-w-xl lg:mx-0 lg:max-w-none">
+              <div
+                className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border shadow-2xl shadow-black/35 ring-1 ring-white/10"
+                style={{ borderColor: "var(--surface-border)" }}
+              >
+                <Image
+                  src={solution.showcase.imagePrimary}
+                  alt="Zero Trace full kit composition — multiple reusables in one frame"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--section)]/50 via-transparent to-transparent"
+                  aria-hidden
+                />
+              </div>
+              <div className="mt-4 grid grid-cols-2 gap-3 sm:absolute sm:bottom-4 sm:right-4 sm:mt-0 sm:w-[min(42%,220px)] sm:grid-cols-1 lg:bottom-6 lg:right-6">
+                <div
+                  className="relative aspect-[4/3] overflow-hidden rounded-2xl border shadow-xl ring-1 ring-black/20"
+                  style={{ borderColor: "var(--surface-border)" }}
+                >
+                  <Image
+                    src={solution.showcase.imageSecondary}
+                    alt="Fulfillment — crated reusables, sanitized staging, and packing for events"
+                    fill
+                    className="object-cover object-center"
+                    sizes="220px"
+                  />
+                </div>
+              </div>
             </div>
-            <p className="mode-muted relative z-[2] px-6 py-4 text-center text-xs md:text-sm">
-              Real kit composition for weddings, corporate events, and campus programs—customizable to your brand.
-            </p>
+            <div className="min-w-0">
+              <p className="mode-accent text-xs font-semibold uppercase tracking-[0.22em]">
+                {solution.showcase.kicker}
+              </p>
+              <h3 className="mode-text mt-3 font-display text-2xl leading-tight md:text-3xl">
+                {solution.showcase.title}
+              </h3>
+              <p className="mode-muted mt-4 text-base leading-relaxed md:text-lg">
+                {solution.showcase.lead}
+              </p>
+              <p className="mode-muted mt-4 text-sm leading-relaxed">
+                Weddings, corporate programs, and campus events—tiered and branded to your run-of-show.
+              </p>
+              <ol className="mt-8 space-y-0">
+                {solution.showcase.steps.map((step, i) => (
+                  <li
+                    key={step.title}
+                    className="flex gap-4 border-t py-4 first:border-t-0 first:pt-0"
+                    style={{ borderColor: "var(--surface-border)" }}
+                  >
+                    <span
+                      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-semibold tabular-nums"
+                      style={{
+                        backgroundColor: "color-mix(in srgb, var(--accent) 22%, transparent)",
+                        color: "var(--accent)",
+                      }}
+                    >
+                      {i + 1}
+                    </span>
+                    <div>
+                      <p className="mode-text font-medium">{step.title}</p>
+                      <p className="mode-muted mt-1 text-sm leading-relaxed">
+                        {step.detail}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
           </div>
         </Reveal>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <Reveal>
+          <p className="mode-muted mt-14 max-w-3xl text-sm leading-relaxed md:text-base">
+            {solution.kitTiersIntro}
+          </p>
+        </Reveal>
+        <div className="mt-8 grid gap-6 md:grid-cols-3">
           {solution.kitImages.map((kit, i) => (
             <Reveal key={kit.title} delay={i * 0.06}>
               <figure
-                className="group rounded-2xl border border-cream/10 bg-forest-deep/55 p-3 mode-surface animate-float transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/25"
-                style={{ animationDelay: `${i * 0.35}s` }}
+                className="group mode-surface flex h-full flex-col overflow-hidden rounded-2xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/25"
+                style={{
+                  borderColor: "var(--surface-border)",
+                  animationDelay: `${i * 0.35}s`,
+                }}
               >
-                <div className="relative overflow-hidden rounded-xl border border-cream/10 transition-transform duration-500 group-hover:scale-[1.02]">
-                  <KitVisual kind={kit.kind} />
+                <div className="relative aspect-[3/4] w-full min-h-[220px] overflow-hidden md:aspect-[4/5]">
+                  <Image
+                    src={kit.image}
+                    alt={`${kit.title} — ${kit.tier}`}
+                    fill
+                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                    style={{ objectPosition: kit.objectPosition }}
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                  <div
+                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--section)]/85 via-[var(--section)]/20 to-transparent"
+                    aria-hidden
+                  />
+                  <p className="absolute left-3 top-3 z-[2] max-w-[85%] rounded-md bg-black/45 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white backdrop-blur-sm md:text-xs">
+                    {kit.tier}
+                  </p>
                 </div>
-                <figcaption className="mode-text px-1 pb-2 pt-4 text-sm font-medium">
-                  {kit.title}
+                <figcaption
+                  className="flex flex-1 flex-col border-t px-4 py-4"
+                  style={{ borderColor: "var(--surface-border)" }}
+                >
+                  <p className="mode-text text-base font-semibold leading-snug">{kit.title}</p>
+                  <p className="mode-muted mt-2 text-sm leading-relaxed">{kit.blurb}</p>
+                  <ul className="mode-muted mt-4 space-y-1.5 border-t border-dashed pt-3 text-xs leading-relaxed" style={{ borderColor: "var(--surface-border)" }}>
+                    {kit.includes.map((line) => (
+                      <li key={line} className="flex gap-2">
+                        <span className="text-[var(--accent)]" aria-hidden>
+                          ·
+                        </span>
+                        <span>{line}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </figcaption>
               </figure>
             </Reveal>
@@ -118,7 +166,10 @@ export function SolutionSection() {
               <ul className="mode-muted mt-4 space-y-3">
                 {solution.features.map((f) => (
                   <li key={f} className="flex gap-3">
-                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full mode-button" />
+                    <span
+                      className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full"
+                      style={{ backgroundColor: "var(--accent)" }}
+                    />
                     <span className="leading-relaxed">{f}</span>
                   </li>
                 ))}
@@ -133,7 +184,10 @@ export function SolutionSection() {
               <ul className="mode-muted mt-4 space-y-3">
                 {solution.uniqueness.map((f) => (
                   <li key={f} className="flex gap-3">
-                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full mode-button" />
+                    <span
+                      className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full"
+                      style={{ backgroundColor: "var(--accent)" }}
+                    />
                     <span className="leading-relaxed">{f}</span>
                   </li>
                 ))}
@@ -142,14 +196,23 @@ export function SolutionSection() {
           </Reveal>
         </div>
         <Reveal>
-          <div className="mt-14 rounded-2xl border border-moss/30 bg-forest-deep/60 p-8">
-            <h3 className="mode-text font-display text-xl">
+          <div
+            className="mode-surface mt-14 rounded-2xl border border-l-4 p-8 shadow-lg shadow-black/20 transition-colors duration-500"
+            style={{
+              borderColor: "var(--surface-border)",
+              borderLeftColor: "var(--accent)",
+            }}
+          >
+            <p className="mode-accent text-xs font-semibold uppercase tracking-[0.2em]">
+              Transparent pricing
+            </p>
+            <h3 className="mode-text mt-2 font-display text-xl md:text-2xl">
               {solution.pricing.headline}
             </h3>
-            <p className="mode-muted mt-3 leading-relaxed">
+            <p className="mode-muted mt-4 leading-relaxed">
               {solution.pricing.detail}
             </p>
-            <p className="mode-muted mt-4 text-sm">
+            <p className="mode-muted mt-4 text-sm leading-relaxed">
               {solution.pricing.volume}
             </p>
           </div>
