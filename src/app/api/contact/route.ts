@@ -101,19 +101,22 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const smtpHost = "smtp.gmail.com";
-  const smtpPort = 465;
-  const smtpSecure = true;
+  const smtpHost = process.env.SMTP_HOST?.trim() || "smtp.gmail.com";
+  const smtpPort = Number(process.env.SMTP_PORT ?? 465);
+  const smtpSecure =
+    process.env.SMTP_SECURE === "true" ||
+    (process.env.SMTP_SECURE ? false : smtpPort === 465);
   const smtpUser = process.env.SMTP_USER?.trim();
   // Gmail app passwords are often copied with spaces; strip them safely.
   const smtpPass = process.env.SMTP_PASS?.replace(/\s+/g, "");
-  const to = "hello.0.trace@gmail.com";
+  const to = (process.env.CONTACT_TO_EMAIL ?? smtpUser)?.trim();
+  const from = (process.env.CONTACT_FROM_EMAIL ?? smtpUser)?.trim();
 
-  if (!smtpUser || !smtpPass) {
+  if (!smtpUser || !smtpPass || !to || !from) {
     return NextResponse.json(
       {
         error:
-          "Email is not configured. Set SMTP_USER and SMTP_PASS.",
+          "Email is not configured. Set at least SMTP_USER and SMTP_PASS.",
       },
       { status: 503 },
     );
@@ -161,21 +164,38 @@ export async function POST(req: NextRequest) {
     auth: { user: smtpUser, pass: smtpPass },
   });
 
-  // Fire-and-forget: return success immediately, send email asynchronously.
-  void transport
-    .sendMail({
-      from: smtpUser,
-      to,
-      replyTo: email.trim(),
-      subject: `Zero Trace inquiry from ${name.trim()}`,
-      text,
-      html,
-    })
-    .catch((error: unknown) => {
+  const mail = {
+    from,
+    to,
+    replyTo: email.trim(),
+    subject: `Zero Trace inquiry from ${name.trim()}`,
+    text,
+    html,
+  };
+
+  // IMPORTANT: On serverless (Vercel), fire-and-forget can be terminated
+  // when the function returns. Await sendMail there for reliability.
+  const isVercelRuntime = Boolean(process.env.VERCEL);
+  const allowAsyncLocal = process.env.CONTACT_EMAIL_ASYNC === "true";
+
+  if (isVercelRuntime || !allowAsyncLocal) {
+    try {
+      const info = await transport.sendMail(mail);
+      console.log("[contact] sendMail success:", info.messageId);
+      return NextResponse.json({ ok: true, queued: false });
+    } catch (error) {
       const messageText =
         error instanceof Error ? error.message : "Failed to send email.";
-      console.error("[contact] async sendMail failed:", messageText);
-    });
+      console.error("[contact] sendMail failed:", messageText);
+      return NextResponse.json({ error: messageText }, { status: 502 });
+    }
+  }
 
+  // Optional local mode: async enqueue-like behavior.
+  void transport.sendMail(mail).catch((error: unknown) => {
+    const messageText =
+      error instanceof Error ? error.message : "Failed to send email.";
+    console.error("[contact] async sendMail failed:", messageText);
+  });
   return NextResponse.json({ ok: true, queued: true });
 }
