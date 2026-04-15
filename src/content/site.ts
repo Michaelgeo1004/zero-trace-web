@@ -18,12 +18,12 @@ export const site = {
   program:
     "Venture developed through the Wadhwani Foundation Ignite India program; MBA coursework at Sathyabama Institute of Science and Technology, Chennai.",
   links: {
-    landing: "https://zerotraceevents.my.canva.site",
-    pitchVideo: "https://youtu.be/zerotracepitch",
+    landing: "https://zero-trace-web-eta.vercel.app/",
+    pitchVideo: "https://res.cloudinary.com/dfh82ci4t/video/upload/v1776242102/zero-trace-promo.mp4",
   },
   contact: {
-    email: "hello@zerotrace.events",
-    phone: "+91 — update with your number",
+    email: "hello.0.trace@gmail.com",
+    phone: "+91 — 8056891004",
     city: "Chennai, Tamil Nadu",
     instagram: "@zerotraceevents",
   },

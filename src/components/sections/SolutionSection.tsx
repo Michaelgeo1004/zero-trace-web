@@ -33,14 +33,14 @@ export function SolutionSection() {
           >
             <div className="relative mx-auto w-full max-w-xl lg:mx-0 lg:max-w-none">
               <div
-                className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border shadow-2xl shadow-black/35 ring-1 ring-white/10"
+                className="relative aspect-[5/4] w-full overflow-hidden rounded-3xl border shadow-2xl shadow-black/35 ring-1 ring-white/10 sm:aspect-[4/5]"
                 style={{ borderColor: "var(--surface-border)" }}
               >
                 <Image
                   src={solution.showcase.imagePrimary}
                   alt="Zero Trace full kit composition — multiple reusables in one frame"
                   fill
-                  className="object-cover object-center"
+                  className="object-cover object-center sm:object-[50%_48%]"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
                 <div
@@ -48,9 +48,9 @@ export function SolutionSection() {
                   aria-hidden
                 />
               </div>
-              <div className="mt-4 grid grid-cols-2 gap-3 sm:absolute sm:bottom-4 sm:right-4 sm:mt-0 sm:w-[min(42%,220px)] sm:grid-cols-1 lg:bottom-6 lg:right-6">
+              <div className="mt-4 hidden grid-cols-1 gap-3 sm:absolute sm:bottom-4 sm:right-4 sm:mt-0 sm:grid sm:w-[min(42%,220px)] sm:grid-cols-1 lg:bottom-6 lg:right-6">
                 <div
-                  className="relative aspect-[4/3] overflow-hidden rounded-2xl border shadow-xl ring-1 ring-black/20"
+                  className="relative aspect-[16/10] overflow-hidden rounded-2xl border shadow-xl ring-1 ring-black/20 sm:aspect-[4/3]"
                   style={{ borderColor: "var(--surface-border)" }}
                 >
                   <Image
@@ -119,12 +119,12 @@ export function SolutionSection() {
                   animationDelay: `${i * 0.35}s`,
                 }}
               >
-                <div className="relative aspect-[3/4] w-full min-h-[220px] overflow-hidden md:aspect-[4/5]">
+                <div className="relative aspect-[4/3] w-full min-h-[200px] overflow-hidden md:aspect-[4/5]">
                   <Image
                     src={kit.image}
                     alt={`${kit.title} — ${kit.tier}`}
                     fill
-                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                    className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.03] md:object-cover"
                     style={{ objectPosition: kit.objectPosition }}
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />

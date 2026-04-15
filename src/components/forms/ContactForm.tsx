@@ -19,11 +19,12 @@ export function ContactForm() {
       eventDate: String(fd.get("eventDate") ?? "").trim(),
       guests: String(fd.get("guests") ?? "").trim(),
       body: String(fd.get("body") ?? "").trim(),
-      website: String(fd.get("website") ?? "").trim(),
+      website: String(fd.get("company_website") ?? "").trim(),
     };
 
     if (payload.website) {
       setStatus("success");
+      form.reset();
       return;
     }
 
@@ -42,7 +43,7 @@ export function ContactForm() {
         setStatus("error");
         const hint =
           res.status === 503
-            ? " Configure Resend (see .env.example) or email us directly."
+            ? " Configure SMTP in .env (see .env.example) or email us directly."
             : "";
         setMessage(
           (data.error ?? "Something went wrong. Please try email instead.") +
@@ -63,9 +64,10 @@ export function ContactForm() {
     <form onSubmit={handleSubmit} className="mt-8 space-y-5">
       <input
         type="text"
-        name="website"
+        name="company_website"
         tabIndex={-1}
-        autoComplete="off"
+        autoComplete="new-password"
+        inputMode="none"
         className="absolute h-px w-px -translate-x-[9999px] opacity-0"
         aria-hidden
       />

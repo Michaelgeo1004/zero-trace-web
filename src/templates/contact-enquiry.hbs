@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zero Trace Inquiry</title>
+  </head>
+  <body style="margin:0;padding:0;background:#edf2ed;font-family:Inter,Arial,Helvetica,sans-serif;color:#1f2b22;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#edf2ed;padding:28px 12px;">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:664px;background:#ffffff;border:1px solid #d3dfd3;border-radius:16px;overflow:hidden;">
+            <tr>
+              <td style="padding:24px 24px 20px;background:linear-gradient(135deg,#102116 0%,#173425 100%);">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td align="left">
+                      <span style="display:inline-block;border:1px solid rgba(154,184,142,0.45);border-radius:999px;padding:6px 10px;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:#9ab88e;">
+                        Zero Trace · New Lead
+                      </span>
+                    </td>
+                  </tr>
+                </table>
+                <h1 style="margin:14px 0 0;font-size:24px;line-height:1.25;color:#edf6ed;">
+                  New event inquiry received
+                </h1>
+                <p style="margin:8px 0 0;font-size:13px;line-height:1.5;color:#c5d7c5;">
+                  A prospect submitted the contact form and is waiting for response.
+                </p>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:20px 24px 8px;">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:separate;border-spacing:0 8px;">
+                  <tr>
+                    <td colspan="2" style="padding-bottom:6px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#6f7f72;">
+                      Contact details
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width:132px;padding:6px 0;font-size:13px;color:#5b6b5f;">Name</td>
+                    <td style="padding:6px 0;font-size:14px;font-weight:600;color:#1f2b22;">{{name}}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:6px 0;font-size:13px;color:#5b6b5f;">Email</td>
+                    <td style="padding:6px 0;font-size:14px;font-weight:600;color:#1f2b22;">{{email}}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:6px 0;font-size:13px;color:#5b6b5f;">Event date</td>
+                    <td style="padding:6px 0;font-size:14px;color:#1f2b22;">{{eventDate}}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:6px 0;font-size:13px;color:#5b6b5f;">Guest count</td>
+                    <td style="padding:6px 0;font-size:14px;color:#1f2b22;">{{guests}}</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:8px 24px 6px;">
+                <p style="margin:0 0 10px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#6f7f72;">Message</p>
+                <div style="background:#f7faf7;border:1px solid #dfe9df;border-radius:12px;padding:14px 16px;font-size:14px;line-height:1.65;color:#1f2b22;">
+                  {{{messageHtml}}}
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:14px 24px 0;">
+                <a
+                  href="mailto:{{email}}"
+                  style="display:inline-block;background:#1e3a2a;color:#f0f7f0;text-decoration:none;font-size:13px;font-weight:600;border-radius:999px;padding:11px 16px;"
+                >
+                  Reply to {{name}}
+                </a>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border-top:1px solid #ecf2ec;padding:16px 24px 20px;">
+                <p style="margin:0;font-size:12px;line-height:1.55;color:#6f7f72;">
+                  Sent from Zero Trace contact workflow. Reply directly to this email to continue the conversation.
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

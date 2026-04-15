@@ -1,9 +1,37 @@
-import { Resend } from "resend";
+import fs from "node:fs";
+import path from "node:path";
+import Handlebars from "handlebars";
+import nodemailer from "nodemailer";
 import { NextRequest, NextResponse } from "next/server";
 
 const WINDOW_MS = 60_000;
 const MAX_PER_WINDOW = 5;
 const buckets = new Map<string, number[]>();
+
+type EmailTemplateData = {
+  name: string;
+  email: string;
+  eventDate: string;
+  guests: string;
+  messageHtml: string;
+};
+
+let renderEmailTemplate:
+  | ((data: EmailTemplateData) => string)
+  | null = null;
+
+try {
+  const templatePath = path.join(
+    process.cwd(),
+    "src",
+    "templates",
+    "contact-enquiry.hbs",
+  );
+  const source = fs.readFileSync(templatePath, "utf8");
+  renderEmailTemplate = Handlebars.compile<EmailTemplateData>(source);
+} catch {
+  renderEmailTemplate = null;
+}
 
 function rateLimit(ip: string): boolean {
   const now = Date.now();
@@ -73,22 +101,24 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_TO_EMAIL;
-  const from =
-    process.env.RESEND_FROM_EMAIL ?? "Zero Trace <onboarding@resend.dev>";
+  const smtpHost = "smtp.gmail.com";
+  const smtpPort = 465;
+  const smtpSecure = true;
+  const smtpUser = process.env.SMTP_USER?.trim();
+  // Gmail app passwords are often copied with spaces; strip them safely.
+  const smtpPass = process.env.SMTP_PASS?.replace(/\s+/g, "");
+  const to = "hello.0.trace@gmail.com";
 
-  if (!apiKey || !to) {
+  if (!smtpUser || !smtpPass) {
     return NextResponse.json(
       {
         error:
-          "Email is not configured. Set RESEND_API_KEY and CONTACT_TO_EMAIL, or use the mailto link.",
+          "Email is not configured. Set SMTP_USER and SMTP_PASS.",
       },
       { status: 503 },
     );
   }
 
-  const resend = new Resend(apiKey);
   const eventDateStr =
     typeof eventDate === "string" && eventDate ? eventDate : "—";
   const guestsStr = typeof guests === "string" && guests ? guests : "—";
@@ -101,21 +131,51 @@ export async function POST(req: NextRequest) {
     "",
     message.trim(),
   ].join("\n");
+  const messageHtml = message
+    .trim()
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/\n/g, "<br/>");
+  const html =
+    renderEmailTemplate?.({
+      name: name.trim(),
+      email: email.trim(),
+      eventDate: eventDateStr,
+      guests: guestsStr,
+      messageHtml,
+    }) ??
+    [
+      `<p><strong>Name:</strong> ${name.trim()}</p>`,
+      `<p><strong>Email:</strong> ${email.trim()}</p>`,
+      `<p><strong>Event date:</strong> ${eventDateStr}</p>`,
+      `<p><strong>Guests:</strong> ${guestsStr}</p>`,
+      "<hr/>",
+      `<p>${messageHtml}</p>`,
+    ].join("");
 
-  const { error } = await resend.emails.send({
-    from,
-    to: [to],
-    replyTo: email.trim(),
-    subject: `Zero Trace inquiry from ${name.trim()}`,
-    text,
+  const transport = nodemailer.createTransport({
+    host: smtpHost,
+    port: smtpPort,
+    secure: smtpSecure,
+    auth: { user: smtpUser, pass: smtpPass },
   });
 
-  if (error) {
-    return NextResponse.json(
-      { error: error.message ?? "Failed to send email." },
-      { status: 502 },
-    );
-  }
+  // Fire-and-forget: return success immediately, send email asynchronously.
+  void transport
+    .sendMail({
+      from: smtpUser,
+      to,
+      replyTo: email.trim(),
+      subject: `Zero Trace inquiry from ${name.trim()}`,
+      text,
+      html,
+    })
+    .catch((error: unknown) => {
+      const messageText =
+        error instanceof Error ? error.message : "Failed to send email.";
+      console.error("[contact] async sendMail failed:", messageText);
+    });
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, queued: true });
 }

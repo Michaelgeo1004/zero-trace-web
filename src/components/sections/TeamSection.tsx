@@ -16,26 +16,25 @@ export function TeamSection() {
             {team.title}
           </h2>
         </Reveal>
-        <div className="mt-12 grid gap-8 md:grid-cols-3">
+        <div className="-mx-4 mt-12 grid auto-cols-[78%] grid-flow-col gap-3 overflow-x-auto px-4 pb-2 snap-x snap-mandatory md:mx-0 md:grid-flow-row md:auto-cols-auto md:grid-cols-3 md:gap-8 md:overflow-visible md:px-0 md:pb-0 md:snap-none">
           {team.members.map((m, i) => (
             <Reveal key={m.name} delay={i * 0.06}>
               <article
-                className="h-full rounded-2xl border border-cream/10 bg-forest-deep/50 p-8 mode-surface animate-lift-hover"
+                className="h-full snap-start rounded-2xl border border-cream/10 bg-forest-deep/50 p-5 mode-surface animate-lift-hover md:p-8"
               >
-                <div className="relative mb-6 aspect-square w-full overflow-hidden rounded-xl border border-cream/10 bg-[var(--section-alt)]">
+                <div className="relative mb-4 aspect-video w-full overflow-hidden rounded-xl border border-cream/10 bg-[var(--section-alt)] md:mb-6 md:aspect-square">
                   <Image
                     src={m.image}
                     alt={`${m.name}, ${m.role}`}
-                    width={420}
-                    height={420}
-                    className="h-full w-full object-cover object-top"
+                    fill
+                    className="object-cover object-center md:object-top"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--section)]/55 via-transparent to-transparent" />
                 </div>
-                <p className="mode-text font-display text-xl">{m.name}</p>
-                <p className="mode-accent mt-2 text-sm font-medium">{m.role}</p>
-                <p className="mode-muted mt-4 text-sm">{m.skills}</p>
+                <p className="mode-text font-display text-lg md:text-xl">{m.name}</p>
+                <p className="mode-accent mt-1.5 text-xs font-medium md:mt-2 md:text-sm">{m.role}</p>
+                <p className="mode-muted mt-3 text-xs md:mt-4 md:text-sm">{m.skills}</p>
               </article>
             </Reveal>
           ))}
